@@ -2,6 +2,7 @@ from dataclasses import dataclass
 
 from app.domain.exceptions.buildings import GeoPointException, InvalidAddressException
 from app.domain.values.base import BaseValueObject
+from app.settings.constants import MAX_ADDRESS_LENGTH
 
 
 @dataclass(frozen=True)
@@ -10,7 +11,7 @@ class Address(BaseValueObject):
 
     def validate(self):
         # TODO: hardcode
-        if len(self.value) > 255:
+        if len(self.value) > MAX_ADDRESS_LENGTH:
             raise InvalidAddressException(self.value)
 
     def as_generic_type(self):

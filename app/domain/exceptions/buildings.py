@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 
 from app.domain.exceptions.base import ApplicationException
+from app.settings.constants import MAX_TITLE_LENGTH
 
 
 @dataclass
@@ -9,7 +10,7 @@ class InvalidAddressException(ApplicationException):
 
     @property
     def message(self):
-        return f'Невалидный адрес здания "{self.address[:255]}"'
+        return f'Невалидный адрес здания "{self.address[:MAX_TITLE_LENGTH]}"'
 
 
 @dataclass

@@ -8,14 +8,15 @@ from app.domain.values.base import BaseValueObject
 
 import re
 
+from app.settings.constants import MAX_TITLE_LENGTH, PHONE_REGEX
+
 
 @dataclass(frozen=True)
 class OrganizationTitle(BaseValueObject):
     value: str
 
     def validate(self):
-        # TODO: dont hardcode
-        if len(self.value) > 255:
+        if len(self.value) > MAX_TITLE_LENGTH:
             raise OrganizationTitleTooLongException(self.value)
 
     def as_generic_type(self):
@@ -27,8 +28,6 @@ class PhoneNumber(BaseValueObject):
     value: str
 
     def validate(self):
-        # TODO: в конфиг вынеси
-        PHONE_REGEX = re.compile(r"^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$")
         if not bool(PHONE_REGEX.match(self.value)):
             raise InvalidPhoneNumberException(self.value)
 
