@@ -19,11 +19,16 @@ class Address(BaseValueObject):
 
 @dataclass(frozen=True, slots=True)
 class GeoPoint(BaseValueObject):
-    latitude: float
-    longitude: float
+    value: tuple
 
     def validate(self):
-        if not (-90 <= self.latitude <= 90):
-            raise GeoPointException(self.latitude, self.longitude)
-        if not (-180 <= self.longitude <= 180):
-            raise GeoPointException(self.latitude, self.longitude)
+        latitude = self.value[0]
+        longitude = self.value[1]
+
+        if not (-90 <= latitude <= 90):
+            raise GeoPointException(latitude, longitude)
+        if not (-180 <= longitude <= 180):
+            raise GeoPointException(latitude, longitude)
+
+    def as_generic_type(self):
+        return tuple(self.value)

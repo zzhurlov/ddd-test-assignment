@@ -4,12 +4,12 @@ from app.domain.exceptions.base import ApplicationException
 
 
 @dataclass
-class TitleTooLongException(ApplicationException):
+class OrganizationTitleTooLongException(ApplicationException):
     title: str
 
     @property
     def message(self):
-        return f'Слишком длинный текст названия "{self.title[:255]}..."'
+        return f'Слишком длинное название организации "{self.title[:255]}..."'
 
 
 @dataclass

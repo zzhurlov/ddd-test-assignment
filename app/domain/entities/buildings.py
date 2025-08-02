@@ -7,7 +7,7 @@ from app.domain.values.buildings import Address, GeoPoint
 @dataclass
 class Building:
     oid: str = field(
-        default_factory=str(uuid4()),
+        default_factory=lambda: str(uuid4()),
         kw_only=True,
     )
     address: Address
