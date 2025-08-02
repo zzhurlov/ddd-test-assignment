@@ -22,6 +22,8 @@ class GeoPoint(BaseValueObject):
     value: tuple
 
     def validate(self):
+        if not isinstance(self.value, tuple):
+            raise GeoPointException(None, None)
         latitude = self.value[0]
         longitude = self.value[1]
 

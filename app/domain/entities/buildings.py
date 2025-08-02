@@ -1,14 +1,10 @@
-from dataclasses import dataclass, field
-from uuid import uuid4
+from dataclasses import dataclass
 
+from app.domain.entities.base import BaseEntity
 from app.domain.values.buildings import Address, GeoPoint
 
 
 @dataclass
-class Building:
-    oid: str = field(
-        default_factory=lambda: str(uuid4()),
-        kw_only=True,
-    )
+class Building(BaseEntity):
     address: Address
     location: GeoPoint

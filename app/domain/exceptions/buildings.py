@@ -14,8 +14,8 @@ class InvalidAddressException(ApplicationException):
 
 @dataclass
 class GeoPointException(ApplicationException):
-    latitude: float
-    longitude: float
+    latitude: float | None
+    longitude: float | None
 
     @property
     def message(self):

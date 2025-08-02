@@ -27,9 +27,10 @@ class PhoneNumber(BaseValueObject):
     value: str
 
     def validate(self):
-        reg_exp = re.fullmatch(r"\+7\d{10}", self.value)
-        if not bool(reg_exp):
-            return InvalidPhoneNumberException(self.value)
+        # TODO: в конфиг вынеси
+        PHONE_REGEX = re.compile(r"^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$")
+        if not bool(PHONE_REGEX.match(self.value)):
+            raise InvalidPhoneNumberException(self.value)
 
     def as_generic_type(self):
         return str(self.value)
