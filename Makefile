@@ -1,7 +1,7 @@
 DC = docker compose
 STORAGES_FILE = docker-compose/storage.yaml
 EXEC = docker exec -it
-DB_CONTAINER = example-db
+DB_CONTAINER = postgres_db
 LOGS = docker logs
 ENV = --env-file .env
 APP_FILE = docker-compose/app.yaml
@@ -26,3 +26,13 @@ app-shell:
 .PHONY: app-down
 app-down:
 	${DC} -f ${APP_FILE} -f ${STORAGES_FILE} down
+
+
+.PHONY: storage
+storage:
+	${DC} -f ${STORAGES_FILE} ${ENV} up --build -d
+
+
+.PHONY: storage-down
+storage-down:
+	${DC} -f ${STORAGES_FILE} down
